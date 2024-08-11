@@ -1,11 +1,14 @@
+QUESTION: Given an unsorted array arr[] of size n. Rotate the array to the left (counter-clockwise direction) by d steps, where d is a positive integer.
+
 ***************************************************************BRUTE FORCE APPROCH********************************************
+//rotate array by one from d time 
 static void rotateArr(int arr[], int d, int n) {   
-        
         for(int i = 0; i < d; i++){
             rotateOnce(arr,n);
         }
     }
-    
+
+//  Rotate array by one
     static void rotateOnce(int arr[], int n){
         int first = arr[0];
         
@@ -39,20 +42,13 @@ static void rotateArr(int arr[], int d, int n) {
 
 ****************************************************************OPTIMAL APPROCCH*****************************************************
 static void rotateArr(int arr[], int d, int n) {
-         
          d %= n;
-         
          reverse(arr,0,n-1);
-         
          reverse(arr,0,n-1-d);
-         
-         reverse(arr,n-d,n-1);
-         
-         
+         reverse(arr,n-d,n-1);  
      }
      
-     static void reverse(int arr[], int start, int end){
-         
+     static void reverse(int arr[], int start, int end){  
          while(start < end){
              int temp = arr[start];
              arr[start++] = arr[end];
