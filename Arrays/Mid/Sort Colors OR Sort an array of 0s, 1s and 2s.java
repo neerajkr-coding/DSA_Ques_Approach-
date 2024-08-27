@@ -40,6 +40,8 @@ public void sortColors(int[] nums) {
 //******************************************************OPTIMAL APPROACH**********************************************************
 
 //Using Dutch National Flag Algorithm (DNF)
+//or Three pointers Approch 
+
 
 //Initialize Pointers:
 //-Set low and mid to 0.
