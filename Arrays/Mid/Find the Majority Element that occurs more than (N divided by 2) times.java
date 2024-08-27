@@ -3,6 +3,7 @@
 //Two Loop approch
 //Loop one to choose a element
 //Loop two to count the occurance of the chosen element
+// TC: O(n^2)  SC: O(1)
 
 static int majorityElement(int a[], int size)
     {
