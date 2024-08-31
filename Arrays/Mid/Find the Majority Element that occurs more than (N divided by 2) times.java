@@ -1,3 +1,7 @@
+QUESTION
+Given an array arr. Find the majority element in the array. If no majority exists, return -1.
+A majority element in an array of size n is an element that appears strictly more than n/2 times in the array.
+
 //******************************************************BRUTE FORCE APPROACH******************************************************
 
 //Two Loop approch
@@ -57,3 +61,45 @@ static int majorityElement(int a[], int size)
     }
 
 //******************************************************OPTIMAL APPROACH**********************************************************
+
+//Set candidate to the first element of the array a.
+//Set vote to 0.
+//Iterate through each element e in array a:
+//-If e is equal to candidate, increment vote.
+//-If e is different from candidate, decrement vote.
+//-If vote becomes negative, update candidate to e and reset vote to 0.
+//Verify Candidate
+// TC: O(n)  SC: O(1)
+
+static int majorityElement(int a[], int size)
+    {
+        
+        
+        int candidate = a[0];
+        int vote = 0;
+        
+        for(int e: a){
+            
+            if(e == candidate){
+                vote++;
+            }else{
+                vote--;
+            }
+            
+            if(vote < 0){
+                candidate = e;
+                vote = 0;
+            }
+        }
+        
+        int cnt = 0;
+        for(int e: a){
+            if(e == candidate){
+                cnt++;
+            }
+        }
+        
+        if(cnt > size/2) return candidate;
+        
+        return -1;
+    }
