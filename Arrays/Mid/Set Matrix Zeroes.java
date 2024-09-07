@@ -141,6 +141,80 @@ class Solution {
 
 //******************************************************BETTER APPROACH***********************************************************
 
+//USING TWO ARRAYS
+
+// Intuition:
+//First identify all the rows and columns that need to be set to zero and then modify them. 
+//This ensures that we do not prematurely overwrite any data that might still be needed for checking other elements in the matrix.
+
+// Algorithm:
+
+// Initialization:
+// //Create two arrays, row and col, to keep track of which rows and columns need to be zeroed.
+
+// Marking Rows and Columns: O(M * N)
+// // Traverse through the matrix.
+// // //Whenever a 0 is found, mark the corresponding row and column in the row and col arrays by setting row[i] = -1 and col[j] = -1.
+
+// Setting Rows to Zero: O(M * N)
+// //Iterate through the row array. 
+// //For each index marked as -1, set all elements in that row to zero using the setRow0 helper method.
+
+// Setting Columns to Zero: O(M * N)
+// //Iterate through the col array. 
+// //For each index marked as -1, set all elements in that column to zero using the setCol0 helper method.
+
+// Helper Methods:
+// //setRow0(int[][] A, int row): Sets all elements in the given row to 0.
+// //setCol0(int[][] A, int col): Sets all elements in the given column to 0.
+
+// TC: O(M * N) + O(M * N) + O(M * N) = O(M * N)
+// SC: O(M + N)
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        int[] row = new int[m];
+        int[] col = new int[n];
+
+
+        //Marking in row and col array
+        for(int i = 0; i < m; i++){
+            for(int j = 0;j < n; j++){
+                if(matrix[i][j] == 0){
+                    row[i] = -1;
+                    col[j] = -1;
+                }
+            }
+        }
+
+        
+        //Setting marked row to zero
+        for(int i = 0; i < m; i++)
+            if(row[i] == -1) setRow0(matrix, i);
+
+        //Setting marked column to zero
+        for(int i = 0; i < n; i++)
+            if(col[i] == -1) setCol0(matrix, i);
+
+
+
+    }
+
+
+    public void setRow0(int[][] A, int row){
+        int n = A[0].length;
+        for(int i = 0; i < n; i++) A[row][i] = 0;      
+    }
+
+    public void setCol0(int[][] A, int col){
+        int m = A.length;
+        for(int i = 0; i < m; i++) A[i][col] = 0; 
+    }
+}
+
 //******************************************************OPTIMAL APPROACH**********************************************************
 
 // TC: O()  SC: O()
