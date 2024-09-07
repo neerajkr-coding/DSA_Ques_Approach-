@@ -112,5 +112,59 @@ USING SORTING
 	}
 
 //******************************************************OPTIMAL APPROACH**********************************************************
+//USING SET DATA STRUCTURE
+// TC:  O(N) + O(2*N) ~ O(3*N)  SC: O(N)
 
-// TC: O(NlogN) + O(N)  SC: O()
+// Intuition:
+// //The goal is to find the longest subsequence where elements are consecutive integers. 
+// //To efficiently check if a number can start a sequence, we use a Set to store all elements of the array. This allows for quick lookups, enabling us to identify potential starting points of sequences. 
+// //If a number is the start of a sequence (i.e., e-1 is not in the set), we check how long the sequence can go by incrementing the number and checking for consecutive elements in the set.
+
+// Algorithm:
+
+// Insert Elements into Set: 
+// //Start by adding all elements from the array into a Set to allow O(1) lookup time.
+
+// Initialize Variables: 
+// //Set maxLen to 0 to store the maximum length of the consecutive subsequence.
+
+// Iterate Through Array: For each element e in the array:
+// //Check if e-1 exists in the set. If it does, e cannot start a new sequence, so skip it.
+// //If e-1 does not exist, start counting the length of the consecutive sequence starting from e by incrementing e and checking if the next number exists in the set.
+// //Keep track of the maximum length sequence found so far.
+
+// Return the Result: 
+// //After iterating through the array, return the maximum sequence length found (maxLen).
+
+	static int findLongestConseqSubseq(int arr[], int N)
+	{
+	    
+	    Set<Integer> set = new HashSet<>();
+	    
+	    for(int e: arr) set.add(e);
+	    
+	    
+	    int maxLen = 0;
+	    
+	    int currLen = 1;
+	    
+	    for(int e: arr){
+	        
+	        if(!set.contains(e-1)){
+	            e++;
+	            while(set.contains(e)){
+	                currLen++;
+	                e++;
+	            }
+	            
+	            maxLen = Math.max(maxLen, currLen);
+	            currLen = 1;
+	        }
+	      
+	    }
+	    
+	      
+	        return maxLen;
+	   
+	   
+	}
