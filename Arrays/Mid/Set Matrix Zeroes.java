@@ -197,4 +197,85 @@ class Solution {
 
 //******************************************************OPTIMAL APPROACH**********************************************************
 
-// TC: O()  SC: O()
+// Intuition:
+// //To efficiently achieve this, we can use the first row and first column of the matrix itself as markers to track which rows and columns should be zeroed out. 
+// //This way, we avoid using additional space beyond the input matrix.
+
+// Algorithm:
+
+// // // Initialization and Marker Setup:
+// // // //Start by determining the dimensions of the matrix (m for rows and n for columns).
+// // // //Use a variable row0 to check if the first row contains any zeros, 
+// // // //as this row will be used for marking columns.
+
+// // First Pass - Mark Rows and Columns: O(M * N)
+// // // Iterate through the matrix.
+// // // //If an element is zero, mark its corresponding row and column by setting the first element of that row and the first element of that column to zero.
+// // // //If the zero is found in the first row, update row0 to 0.
+
+// // Second Pass - Set Matrix Elements to Zero: O(M * N)
+// // // Iterate through the matrix again,starting from the second row and second column.
+// // // //For each element, if the first element of its row or column is zero, set the element to zero.
+
+// // // Handle the First Column: O(M)
+// // // //If the first element of the matrix (matrix[0][0]) is zero, set the entire first column to zero.
+
+// // // Handle the First Row: O(N)
+// // // //If row0 is zero, set the entire first row to zero.
+
+// TC: O(M * N) + O(M * N) + O(M) + O(N) = O(2(M * N)) + O(M + N) ~ O(M * N)   
+// SC: O(1)
+
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        //Speical marker for 0th row to prevent overwriting
+        int row0 = -1;
+
+        //Iterating to mark relevent row and column
+        for(int i = 0; i < m; i++){
+
+            for(int j = 0; j < n; j++){
+
+                
+                if(matrix[i][j] == 0){
+                    if(i == 0){         // if row 0 contains a 0
+                        row0 = 0;       
+                    }else{
+                        matrix[i][0] = 0;
+                    }
+
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        //Making marked row and column zero except the 0th row and column to prevent overwriting
+        for(int i = 1; i < m; i++){
+
+            for(int j = 1; j < n; j++){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        //making 0th column 0 if marked
+        if(matrix[0][0] == 0){
+            for(int i = 0; i < m; i++){ 
+                matrix[i][0] = 0;
+                }
+        }
+
+        //Making 0th row 0 if marked
+        if(row0 == 0){
+            for(int i = 0; i < n; i++) matrix[0][i] = 0;
+        }
+    }
+}
+
+
