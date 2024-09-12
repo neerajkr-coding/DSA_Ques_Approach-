@@ -69,4 +69,48 @@
 
 //******************************************************OPTIMAL APPROACH**********************************************************
 
-// TC: O()  SC: O()
+    // USING PREFIX SUM TECHNIQUE
+    
+    // Intuition:
+    // // The key observation is that if the cumulative sum up to index i is sum, 
+    // // and there exists a previous cumulative sum equal to (sum - k), 
+    // // then the subarray between these two indices sums up to k.
+
+    // Algorithm:
+    // // // Initialize count to 0 and sum to 0.
+
+    // // // Use a hash map hash to store the frequency of prefix sums, 
+    // // // Add{0: 1} to the hashmap(to handle the case where the subarray starting from index 0 equals x).
+
+    // // Iterate over each element e in the array:   O(N)
+    // // // Add e to sum.
+    // // // If sum - x exists in the map, increment count by the frequency of sum - x.
+    // // // Add sum to the map or increment its frequency if already exist.
+
+    // TC: O(N)  
+    // SC: O(N)
+
+    public int subarraySum(int[] nums, int x) {
+
+        int count = 0;
+        Map<Integer, Integer> hash = new HashMap<>();
+        hash.put(0,1);
+
+        int sum = 0;
+        for(int e: nums){
+            sum += e;
+
+            if(hash.containsKey(sum - x)) count += hash.get(sum - x);
+
+            if(!hash.containsKey(sum)){
+                hash.put(sum,1);
+            }else{
+                hash.put(sum, hash.get(sum) + 1);
+            }
+
+            
+        }
+
+        return count;   
+    }
+
