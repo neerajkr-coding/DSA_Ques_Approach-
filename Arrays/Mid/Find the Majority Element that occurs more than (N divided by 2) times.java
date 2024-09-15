@@ -62,6 +62,8 @@ static int majorityElement(int a[], int size)
 
 //******************************************************OPTIMAL APPROACH**********************************************************
 
+//  USING BOYER MOORE'S VOTING ALGORITHM
+
 //Set candidate to the first element of the array a.
 //Set vote to 0.
 //Iterate through each element e in array a:
