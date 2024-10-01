@@ -58,15 +58,51 @@ int[] findTwoElement(int arr[]) {
 
 //******************************************************OPTIMAL APPROACH**********************************************************
 
-// .
+// MATHEMATICAL APPROACH
 
 
 // INTUITION
 
 
 // ALGORITHM
+We know the sum of the first n natural numbers (S) and the sum of the squares of the first n natural numbers (S2). 
+By comparing these sums with the actual sums (Sn and Sn2) derived from the array, we can deduce the missing (x) and repeating (y) numbers using equations.
 
-
+int[] findTwoElement(int arr[]) {
+        
+        int n = arr.length;
+        
+        long Sn = 0;
+        long Sn2 = 0;
+        
+        for(int e: arr){
+            Sn += e;
+            Sn2 += e*e;
+        }
+        
+        
+        
+        long S = ((long)n * ((long)n + 1))/2;
+        long S2 = ((long)n * ((long)n + 1)*(2 * n + 1))/6;
+        
+        if(S == Sn){
+            return new int[]{0,0};
+        }
+        
+        long val1 = S - Sn;
+        long val2 = S2 - Sn2;
+        
+        val2 = val2 / val1;
+        
+        long x = (val1 + val2)/2;
+        long y = val2 - x;
+        
+        int[] ans = {(int)y, (int)x};
+        return ans;
+        
+        
+    }
+  
 // TC: O()  SC: O()
 
 
