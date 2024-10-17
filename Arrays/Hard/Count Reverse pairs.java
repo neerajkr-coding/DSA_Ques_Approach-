@@ -1,6 +1,6 @@
 //******************************************************BRUTE FORCE APPROACH******************************************************
 
-// .
+// USING TWO LOOPS
 
 
 INTUITION
@@ -9,7 +9,23 @@ INTUITION
 ALGORITHM
 
 
-// TC: O()  SC: O()
+public int countRevPairs(int N, int arr[]) {
+        
+        int cnt = 0;
+
+        for(int i = 0; i < N; i++ ){
+            
+            for(int j = i + 1; j < N; j++){
+                
+                if(arr[i] > 2 * (long)arr[j]) cnt++;
+            }
+        }
+        
+        return cnt;
+    }
+
+
+// TC: O(N^2)  SC: O(1)
 
 
 
